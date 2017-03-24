@@ -1,0 +1,110 @@
+\chapter{General Topology}
+\section{Definitions and Basic Notions}
+\begin{definition}
+	Let $X$ be a set. A \bld{topology} on $X$ is a collection $\mathcal{T}$ of subsets of $X$ satisfying the following properties:
+	\begin{enumerate}
+		\item $\varnothing, X \in \mathcal{T}$.
+		\item If $U,V \in \mathcal{T}$, then $U \cap V \in \mathcal{T}$.
+		\item If $(U_\alpha)_{\alpha \in A}$ is a family of elements of $\mathcal{T}$, then $\bigcup_{\alpha \in A} U_\alpha \in \mathcal{T}$.	
+	\end{enumerate}
+
+	A \bld{topological space} is a tuple $(X,\mathcal{T})$, where $\mathcal{T}$ is a topology on $X$. Elements of $\mathcal{T}$ are called \bld{open sets}. 
+\end{definition}
+
+\begin{example}[Topologies]
+	Let $X$ be a set. The reader may verify that the the following collections are indeed topologies on $X$.
+	\begin{enumerate}[label = \textup{(}\alph*\textup{)}]
+		\item The collection $\mathcal{P}(X)$ is a topology on $X$, called the \bld{discrete topology}.			
+		\item The collection $\cbr[0]{\varnothing,X}$ is a topology on $X$, called the \bld{trivial topology}.
+		\item Let $\mathcal{T}$ be a topology on $X$ and let $S \subseteq X$. Then the collection $\cbr[0]{S \cap U : U \in \mathcal{T}}$ is a topology on $S$, called the \bld{subspace topology}.
+		\item The collection
+			\begin{equation}
+				\mathcal{T}_d := \cbr[0]{A \subseteq M :  \forall x \in A \exists r > 0 \text{ such that } B_r(x) \subseteq A}
+			\end{equation}
+			\noindent is a topology on $M$, called the \bld{metric topology induced by the metric $d$}.
+	\end{enumerate}
+\end{example}
+
+\begin{definition}
+	Let $X$ be a topological space and $x \in X$. An open set $U$ is called a \bld{neighbourhood of $x$} if $x \in U$.
+\end{definition}
+
+\begin{definition}
+	Let $(X,\mathcal{T})$ be a topological space and $A \subseteq X$. The \bld{closure of $A$ in $X$}, denoted by $\overline{A}$, is defined by 
+	\begin{equation}
+		\overline{A} := \bigcap\cbr[0]{B \subseteq X : A \subseteq B, B^c \in \mathcal{T}}.
+	\end{equation}
+
+	The \bld{interior of $A$ in $X$}, denoted by $\Int A$, is defined by 
+	\begin{equation}
+		\Int A := \bigcup\cbr[0]{C \subseteq X: C \subseteq A, C \in \mathcal{T}}.	
+	\end{equation}
+\end{definition}
+
+\begin{definition}
+	Let $X$ be a topological space. $X$ is called a \bld{Hausdorff space} if given $p,q \in X$ with $p \neq q$ we find neighbourhoods $U$ and $V$ of $p$ and $q$, respectively, such that $U \cap V = \varnothing$	
+\end{definition}
+
+\begin{definition}
+	Let $(X,\mathcal{T})$ be a topological space. A collection $\mathcal{B}$ of subsets of $X$ is called a \bld{basis for the topology of $X$} if the following two conditions hold:
+
+	\begin{enumerate}
+		\item $\mathcal{B} \subseteq \mathcal{T}$.
+		\item For any $U \in \mathcal{T}$ we have $U = \bigcup_{\alpha \in A} B_\alpha$ where $B_\alpha \in \mathcal{B}$ for any $\alpha \in A$.
+	\end{enumerate}
+	\label{def:basis_topology}
+\end{definition}
+
+\begin{definition}
+	Let $X$ be a topological space. $X$ is called \bld{second countable} if there exists a countable basis for the topology of $X$.
+\end{definition}
+
+\begin{definition}
+	Let $X$ and $Y$ be two topological spaces and $f: X \to Y$. The map $f$ is said to be \bld{continuous} if for any open set $U \subseteq Y$ we have that $f^{-1}(U)$ is open in $X$.
+\end{definition}
+
+\begin{definition}
+	Let $X$ be a topological space. If $X = U \cup V$ for some disjoint, nonempty, open sets $U,V \subseteq X$, $X$ is called \bld{disconnected}, otherwise $X$ is said to be \bld{connected}.
+\end{definition}
+
+\begin{definition}
+	Let $X$ be a topological space. An \bld{open cover} of $X$ is a family $(U_\alpha)_{\alpha \in A}$ of open subsets of $X$ such that $X = \bigcup_{\alpha \in A}U_\alpha$. A \bld{subcover} of $(U_\alpha)_{\alpha \in A}$ is a subfamily $(U_\beta)_{\beta \in B}$, $B \subseteq A$, such that $X = \bigcup_{\beta \in B}U_\beta$.	
+\end{definition}
+
+\begin{definition}
+	A topological space $X$ is said to be \bld{compact} if every open cover has a finite subcover.
+\end{definition}
+
+\begin{definition}
+	Let $X$ be a topological space. $X$ is said to be \bld{locally Euclidean of dimension $n$} if every point of $X$ has a neighbourhood in $X$ that is homeomorphic to an open subset of $\mathbb{R}^n$.	
+\end{definition}
+
+\begin{definition}[Topological Manifold]
+	An \bld{$n$-dimensional topological manifold} is a second countable Hausdorff space that is locally Euclidean of dimension $n$.	
+\end{definition}
+
+\begin{definition}
+	Let $M$ be a topological $n$-manifold. If $(U,\varphi)$, $(V,\psi)$ ae two charts such that $U \cap V \neq \varnothing$, the composite map
+	\begin{equation}
+		\psi \circ \varphi: \varphi(U \cap V) \to \psi(U \cap V)
+	\end{equation}
+
+	\noindent is called the \bld{transition map from $\varphi$ to $\psi$}.  
+\end{definition}
+
+\begin{definition}
+	Let $M$ be a topological $n$-manifold. A collection of charts $\cbr[0]{(U_\alpha,\varphi_\alpha) : \alpha \in A}$ is said to be an \bld{atlas of class $\mathscrbf{C}$ for $M$} if 
+	\begin{enumerate}
+		\item $M = \bigcup_{\alpha \in A} U_\alpha$.
+		\item $\varphi_\alpha \circ \varphi_\beta \in \mathscr{C}$ for all $\alpha,\beta \in A$.
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[Manifolds of Class $\mathscrbf{C}$]
+	Let $M$ be a topological manifold. A \bld{$\mathscrbf{C}$-structure on $M$} is an atlas $\mathcal{A} := \cbr[0]{(U_\alpha,\varphi_\alpha) : \alpha \in A}$ of class $\mathscr{C}$ for $M$ that has the following \bld{maximality property}: if $(U,\varphi)$ is a chart such that $\varphi \circ \varphi_\alpha^{-1}$ and $\varphi_\alpha \circ \varphi^{-1}$ are of class $\mathscr{C}$ for all $\alpha \in A$, then $(U,\varphi) \in \mathcal{A}$. The tuple $(M,\mathcal{A})$, where $\mathcal{A}$ is a $\mathscr{C}$-structure on $M$, is called a \bld{manifold of class $\mathscrbf{C}$}. An atlas for $M$ which has the maximality property is called a \bld{maximal atlas of class $\mathscr{C}$ for $M$}.
+\end{definition}
+
+\begin{proposition}
+	Let $M$ be a topological manifold. Every atlas $\mathcal{A}$ of class $\mathscr{C}$ for $M$ is contained in a unique maximal atlas of the same class $\mathscr{C}$ for $M$, called the \bld{$\mathscrbf{C}$-structure determined by $\mathcal{A}$}. 
+\end{proposition}
+

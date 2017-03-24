@@ -1,0 +1,106 @@
+\input{header.tex}
+
+\title{Notes on Smooth Manifolds}
+\author{Yannis B\"{a}hni}
+\address[Yannis B\"{a}hni]{University of Zurich, R\"{a}mistrasse 71, 8006 Zurich}
+\email[Yannis B\"{a}hni]{\href{mailto:yannis.baehni@uzh.ch}{yannis.baehni@uzh.ch}}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+%Topology
+\input{1_general_topology.tex}
+\newpage
+\begin{definition}[Tangent Space]
+	A linear map $v: C^\infty(M) \to \mathbb{R}$ is called a \bld{derivation at p} if it satisfies
+	\begin{equation}
+		v(fg) = f(p)v(g) + g(p)v(f) \qquad \forall f,g \in C^\infty(M).
+	\end{equation}
+
+	The set of all derivations of $C^\infty(M)$ at $p$, denoted by $T_pM$, is a vector space called the \bld{tangent space to $M$ at $p$}.
+\end{definition}
+
+\begin{lemma}[Properties of Tangent Vectors on Manifolds]
+	Suppose $M$ is a smooth manifold, $p \in M$, $v \in T_pM$ and $f,g \in C^\infty(M)$.
+	\begin{enumerate}[label = (\alph*)]
+		\item If $f$ is a constant function, then $v(f) = 0$.
+		\item If $f(p) = g(p) = 0$, then $v(fg) = 0$.
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	Property (b) is immediate and (a) follows from
+	\begin{equation}
+		v(1) = v(1 \cdot 1) = 2v(1)
+	\end{equation}
+
+	\noindent which implies $v(1) = 0$ and thus by linearity 
+	\begin{equation}
+		v(\lambda) = v(\lambda \cdot 1) = \lambda v(1) = 0	
+	\end{equation}
+
+	\noindent where $\lambda \in \mathbb{R}$.
+\end{proof} 
+
+\begin{definition}[Tangent Bundle]
+	Let $M$ be a smooth manifold. The \bld{tangent bundle of $M$}, denoted by $TM$, is defined to be
+	\begin{equation}
+		TM := \coprod_{p \in M} T_p M.
+	\end{equation}
+
+	The mapping $\pi: TM \to M$ which is defined by $\pi(p,v) := p$ is called \bld{projection map}.
+\end{definition}
+
+\begin{definition}[Vector Fields]
+	Let $M$ be a smooth manifold. A \bld{vector field on $M$} is a section of the map $\pi: TM \to M$, i.e. a vector field is a continuous map $X : M \to TM$, usually written $p \mapsto X_p$, with the property that 
+	\begin{equation}
+		\pi \circ X = \id_M
+	\end{equation}
+
+	\noindent or equivalently, $X_p \in T_pM$ for every $p \in M$. We say that a vector field $X$ is a \bld{smooth vector field} if $X: M \to TM$ is a smooth map. The \bld{set of all smooth vector fields on $M$} is denoted by $\mathfrak{X}(M)$.
+\end{definition}
+
+\begin{proposition}[Lipschitz Estimate for \boldmath$C^1$\unboldmath-functions]
+	
+\end{proposition}
+
+\begin{theorem}[Inverse Function Theorem]
+	Suppose $U$ and $V$ are open subsets of $\mathbb{R}^n$, and $F: U \to V$ is a $\mathscr{C}^1$-function. If $DF(a)$ is invertible at some point $a \in U$, then there exist connected neighborhoods $U_0 \subseteq U$ of $a$ and $V_0 \subseteq V$ of $F(a)$ such that $F\vert_{U_0}: U_0 \to V_0$ is a $\mathscr{C}^1$-diffeomorphism.	
+	\label{thm:inverse_fun_thm}
+\end{theorem}
+
+\begin{proof}
+	The proof is based on Banach fixed point theorem (see \cite[657]{lee2013introduction}). Since $U$ is open, we find $\varepsilon > 0$ such that $B_\varepsilon(a) \subseteq U$. Hence define $\varphi: B_\varepsilon(0) \to \mathbb{R}^n$ by
+	\begin{equation}
+		\varphi(x) := F(x + a) - F(a)
+	\end{equation}
+
+	Observe, that $\varphi \in \mathscr{C}^1$ with $D\varphi(0) = DF(a)$. Also the composition $D\varphi(0)^{-1} \circ \varphi$ is $\mathscr{C}^1$. Furthermore
+	\begin{align*}
+		D(D\varphi(0)^{-1} \circ \varphi)(0) = D(D\varphi(0)^{-1})(\varphi(0)) \circ D\varphi(0) = D\varphi(0)^{-1} \circ D\varphi(0) = \id_{\mathbb{R}^n}
+	\end{align*}
+
+	Therefore we can assume that $F: B_\varepsilon(0) \to \mathbb{R}^n$ fulfills $F(0) = 0$ and $DF(0) = \id_{\mathbb{R}^n}$. Since $\det(DF(x))$ is a continuous function, we can assume that $DF(x)$ is invertible for every $x \in U$.
+	Define $\psi: U \to \mathbb{R}^n$ by
+	\begin{equation}
+		\psi(x) := x - F(x).
+	\end{equation}
+\end{proof}
+
+\begin{theorem}[Implicit Function Theorem]
+	Let $U \subseteq \mathbb{R}^n \times \mathbb{R}^k$ be an open subset, and let $(x,y) = (x^1,\dots,x^n,y^1,\dots,y^k)$ denote the standard coordinates on $U$. Suppose $\Phi: U \to \mathbb{R}^k$ is a $\mathscr{C}^1$-function, $(a,b) \in U$, and $c := \Phi(a,b)$. If the $k \times k$ matrix
+	\begin{equation}
+		A := \del[3]{\frac{\partial\Phi^i}{\partial y^j}(a,b)}_{1 \leq i,j \leq k}
+	\end{equation}
+	\noindent is non-singular, i.e. $A \in \GL(k,\mathbb{R})$, then there exist neighbourhoods $V_0 \subseteq \mathbb{R}^n$ of $a$ and $W_0 \subseteq \mathbb{R}^k$ of $b$ and a $\mathscr{C}^1$-function $F: V_0 \to W_0$ such that $\Phi^{-1}(c) \cap (V_0 \times W_0)$ is the graph of $F$, that is, $\Phi(x,y) = c$ for $(x,y) \in V_0 \times W_0$ if and only if $y = F(x)$.
+	\label{thm:implicit_fun_thm}
+\end{theorem}
+
+\begin{proof}
+	
+\end{proof}
+%\originalsectionstyle
+\printbibliography
+\end{document}
